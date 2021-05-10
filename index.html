@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- displays site properly based on user's device -->
+
+  <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png">
+  
+  <title>Frontend Mentor | Intro component with sign up form</title>
+
+  <!-- Feel free to remove these styles or customise in your own stylesheet 👍 -->
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+
+    *,
+    *::before,
+    *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      height: 100%;
+    }
+
+    body {
+      min-height: 100%;
+      font-family: Poppins, sans-serif;
+      background-color: hsl(0, 100%, 74%);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    body::after {
+      content: "";
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      z-index: -1;
+      background-image: url(./images/bg-intro-mobile.png);
+      background-repeat: no-repeat;
+      background-size: cover;
+    }
+
+    .wrapper {
+      width: 88%;
+      max-width: 1024px;
+      margin: 3.75rem auto;
+    }
+
+    h1,
+    .description {
+      color: white;
+      text-align: center;
+    }
+
+    h1 {
+      margin-bottom: .75rem;
+    }
+
+    .description {
+      margin-bottom: 2.5rem;
+    }
+
+    .free-trial {
+      width: 100%;
+      color: white;
+      padding: 1rem 7rem;
+      border: none;
+      border-radius: .5rem;
+      background-color: hsl(248, 32%, 46%);
+      margin-bottom: 1rem;
+      box-shadow: 0 .375rem 0 rgba(0, 0, 0, 0.2);
+    }
+
+    .free-trial span {
+      font-weight: 700;
+    }
+
+    .card {
+      padding: .625rem 1rem 1rem 1rem;
+      border-radius: .5rem;
+      background-color: white;
+    }
+
+    .form {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-bottom: .25rem;
+    }
+
+    .input-container {
+      width: 100%;
+      position: relative;
+    }
+
+    .input-container.invalid::after {
+      content: "";
+      width: 24px;
+      aspect-ratio: 1;
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      right: .425rem;
+      z-index: 2;
+      background-image: url(./images/icon-error.svg);
+    }
+
+    .input {
+      margin: .375rem 0;
+      width: 100%;
+      padding: .625rem 0 .625rem 1.5rem;
+      border: 1px solid rgba(0, 0, 0, 0.2);
+      border-radius: .25rem;
+      position: relative;
+      color: hsl(249, 10%, 26%);
+      font-weight: 600;
+    }
+
+    .input:focus {
+      outline: none;
+      border: 1px solid hsl(249, 10%, 26%);
+    }
+
+    .input-container.invalid .input {
+      border-color: hsl(0, 100%, 74%);
+    }
+
+    .invalid-clue {
+      font-style: italic;
+      font-size: .625rem;
+      align-self: flex-end;
+      color: hsl(0, 100%, 74%);
+    }
+
+    .input-container.invalid #email::placeholder {
+      color: hsl(0, 100%, 74%);
+      font-weight: 600;
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    .claim-free-trial {
+      width: 100%;
+      color: white;
+      margin: .375rem 0;
+      padding: 1rem 0;
+      background-color: hsl(154, 59%, 51%);
+      border: none;
+      border-radius: .25rem;
+      box-shadow: 0 .2rem 0 hsl(154, 55%, 46%);
+      text-transform: uppercase;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    .term-service {
+      font-size: .625rem;
+      text-align: center;
+      color: hsl(246, 25%, 77%);
+    }
+
+    .term-service span {
+      color: hsl(0, 100%, 74%);
+      font-weight: 600;
+    }
+
+    footer {
+      width: 100%;
+      position: relative;
+      bottom: .25rem;
+      color: white;
+    }
+    .attribution {
+      font-size: 11px;
+      text-align: center;
+    }
+
+    .attribution a {
+      color: white;
+      font-weight: 700;
+      text-decoration: none;
+    }
+
+    .attribution a:hover {
+      text-decoration: underline;
+    }
+
+    @media (min-width: 1024px) {
+      .wrapper {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .text,
+      .interaction {
+        width: 45%;
+      }
+
+      .text {
+        padding: 1rem;
+      }
+
+      .text h1,
+      .text p {
+        text-align: left;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrapper">
+    <div class="text">
+      <h1>
+        Learn to code by watching others
+      </h1>
+      <p class="description">
+        See how experienced developers solve problems in real-time. Watching scripted tutorials is great, 
+        but understanding how developers think is invaluable. 
+      </p>
+    </div>
+    <div class="interaction">
+      <button class="free-trial">
+        <span>Try it free 7 days</span> then $20/mo. thereafter
+      </button>
+      <div class="card">
+        <form class="form">
+          <div id="first-container" class="input-container">
+            <input type="text" name="first" id="first-name" placeholder="First Name" class="input">
+          </div>
+          <p id="first-invalid" class="invalid-clue hidden">First Name cannot be empty</p>
+          <div id="last-container" class="input-container">
+            <input type="text" name="last" id="last-name" placeholder="Last Name" class="input">
+          </div>
+          <p id="last-invalid" class="invalid-clue hidden">Last Name cannot be empty</p>
+          <div id="email-container" class="input-container">
+            <input type="email" name="email" id="email" placeholder="Email" class="input">
+          </div>
+          <p id="email-invalid" class="invalid-clue hidden">Look like this is not an email</p>
+          <div id="password-container" class="input-container">
+            <input type="password" name="password" id="password" placeholder="Password" class="input">
+          </div>
+          <p id="password-invalid" class="invalid-clue hidden">Password cannot be empty</p>
+          <button type="button" class="claim-free-trial" onclick="validate()">Claim Your Free Trial</button>
+        </form>
+        <p class="term-service">
+          By clicking the button, you are agreeing to our <span>Terms and Services</span>
+        </p>
+      </div>
+    </div>
+  </div>
+  <footer>
+    <p class="attribution">
+      Challenge by <a href="https://www.frontendmentor.io?ref=challenge" target="_blank">Frontend Mentor</a>. 
+      Coded by <a href="https://lutfihakim.netlify.app" target="blank">Lutfi Hakim</a>.
+    </p>
+  </footer>
+
+  <script>
+    const first = document.getElementById('first-name');
+    const last = document.getElementById('last-name');
+    const email = document.getElementById('email');
+    const password = document.getElementById('password');
+    const firstClue = document.getElementById('first-invalid');
+    const lastClue = document.getElementById('last-invalid');
+    const emailClue = document.getElementById('email-invalid');
+    const passwordClue = document.getElementById('password-invalid');
+    const firstContainer = document.getElementById('first-container');
+    const lastContainer = document.getElementById('last-container');
+    const emailContainer = document.getElementById('email-container');
+    const passwordContainer = document.getElementById('password-container');
+    const firstPlaceholder = first.getAttribute('placeholder');
+    const lastPlaceholder = last.getAttribute('placeholder');
+    const emailPlaceholder = email.getAttribute('placeholder');
+    const passwordPlaceholder = password.getAttribute('placeholder');
+
+    function validate() {
+      const firstValue = first.value;
+      const lastValue = last.value;
+      const emailValue = email.value;
+      const passwordValue = password.value;
+      const validEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailValue);
+
+      first.value = '';
+      last.value = '';
+      email.value = '';
+      password.value = '';
+
+      if (firstValue.length == 0) {
+        firstContainer.classList.add('invalid');
+        firstClue.classList.remove('hidden');
+        first.setAttribute('placeholder', '');
+      } else {
+        firstContainer.classList.remove('invalid');
+        firstClue.classList.add('hidden');
+        first.setAttribute('placeholder', firstPlaceholder);
+      };
+
+      if (lastValue.length == 0) {
+        lastContainer.classList.add('invalid');
+        lastClue.classList.remove('hidden');
+        last.setAttribute('placeholder', '');
+      } else {
+        lastContainer.classList.remove('invalid');
+        lastClue.classList.add('hidden');
+        last.setAttribute('placeholder', lastPlaceholder);
+      };
+
+      if (emailValue.length == 0 || !validEmail) {
+        emailContainer.classList.add('invalid');
+        emailClue.classList.remove('hidden');
+        email.setAttribute('placeholder', 'email@example.com')
+      } else {
+        emailContainer.classList.remove('invalid');
+        emailClue.classList.add('hidden');
+        email.setAttribute('placeholder', emailPlaceholder);
+      };
+
+      if (passwordValue.length == 0) {
+        passwordContainer.classList.add('invalid');
+        passwordClue.classList.remove('hidden');
+        password.setAttribute('placeholder', '');
+      } else {
+        passwordContainer.classList.remove('invalid');
+        passwordClue.classList.add('hidden');
+        password.setAttribute('placeholder', passwordPlaceholder);
+      };
+    };
+
+    first.addEventListener('keypress', () => {
+      firstContainer.classList.remove('invalid');
+      firstClue.classList.add('hidden');
+    })
+
+    last.addEventListener('keypress', () => {
+      lastContainer.classList.remove('invalid');
+      lastClue.classList.add('hidden');
+    })
+
+    email.addEventListener('keypress', () => {
+      emailContainer.classList.remove('invalid');
+      emailClue.classList.add('hidden');
+    })
+
+    password.addEventListener('keypress', () => {
+      passwordContainer.classList.remove('invalid');
+      passwordClue.classList.add('hidden');
+    })
+  </script>
+</body>
+</html>
